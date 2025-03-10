@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from werkzeug.utils import secure_filename
 from flask_cors import CORS  # Added for CORS support
 import pytesseract
@@ -71,7 +71,11 @@ def extract_aadhaar():
     print("\nExtracted Aadhaar Details:")
     print(aadhaar_data)
 
-    return jsonify(aadhaar_data)
+    # Custom CORS headers to ensure success
+    response = make_response(jsonify(aadhaar_data))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8000)
