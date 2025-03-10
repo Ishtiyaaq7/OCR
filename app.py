@@ -9,7 +9,7 @@ import fitz
 import re
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all routes
 
 class AadhaarData:
     def __init__(self):
@@ -47,8 +47,6 @@ def parse_aadhaar_details(text: str) -> dict:
     aadhaar_match = re.search(r'\b(\d{4}\s\d{4}\s\d{4})\b', text)
     if aadhaar_match:
         data.aadhaar_number = aadhaar_match.group(1)
-
-    # Additional parsing logic here... (for brevity, logic can be copied as is)
 
     return vars(data)
 
