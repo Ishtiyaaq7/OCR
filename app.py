@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import Flask-CORS for handling CORS
 from pydantic import BaseModel
 import pytesseract
 from pdf2image import convert_from_bytes
@@ -8,11 +9,12 @@ import fitz  # PyMuPDF
 import re
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for the entire app
 
 class AadhaarData(BaseModel):
     aadhaar_number: str = ""
-    name_tamil: str = ""  # Tamil Name
-    name: str = ""        # English Name
+    name_tamil: str = ""  
+    name: str = ""        
     guardian_name: str = ""
     dob: str = ""
     gender: str = ""
