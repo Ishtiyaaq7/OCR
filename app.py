@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
+from flask_cors import CORS  # Added for CORS support
 import pytesseract
 from pdf2image import convert_from_bytes
 from PIL import Image
@@ -8,6 +9,7 @@ import fitz
 import re
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 class AadhaarData:
     def __init__(self):
