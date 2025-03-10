@@ -1,7 +1,7 @@
-Flask==3.0.0
-Flask-Cors==4.0.0
-pytesseract==0.3.10
-pdf2image==1.16.3
-Pillow==10.0.1
-PyMuPDF==1.22.3
-gunicorn==21.2.0
+flask
+flask-cors
+pydantic
+pytesseract
+pdf2image
+Pillow
+pymupdf
