@@ -50,6 +50,13 @@ def parse_aadhaar_details(text: str) -> dict:
 
     return vars(data)
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    return response
+
 @app.route("/extract", methods=["POST"])
 def extract_aadhaar():
     if 'file' not in request.files:
@@ -71,11 +78,7 @@ def extract_aadhaar():
     print("\nExtracted Aadhaar Details:")
     print(aadhaar_data)
 
-    # Custom CORS headers to ensure success
-    response = make_response(jsonify(aadhaar_data))
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    return response
+    return jsonify(aadhaar_data)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8000)
