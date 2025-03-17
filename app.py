@@ -124,7 +124,7 @@ def parse_aadhaar_details(text: str) -> AadhaarData:
     # State
     state_match = re.search(r'State[:\s]*(.*)', text, re.IGNORECASE)
     if state_match:
-        data.state = state_match.group(1).strip()
+        data.state = state_match.group(1).strip().rstrip(',')
 
     # Pincode
     pincode_match = re.search(r'\b(\d{6})\b', text)
